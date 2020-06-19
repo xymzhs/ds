@@ -1,16 +1,14 @@
 import * as React from "react";
-import {LinkedList} from "../structures/linkedList"
-
+import {LinkedList} from "../structures/LinkedList"
+import {DoublyLinkedList} from "../structures/DoublyLinkedList"
 const l = new LinkedList<number>()
+const l2 = new DoublyLinkedList<number>()
 
-console.log(l.push(3));
-console.log(l.push(4));
-console.log(l.insert(5,1));
-console.log(l.remove(3));
+console.log(l2.insert(5,0));
 
-console.log(l);
-console.log(l.getElementAt(1));
-console.log(l.getElementAt(0));
+console.log(l2);
+console.log(l2.getElementAt(1));
+console.log(l2.getElementAt(0));
 
 
 
