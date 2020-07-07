@@ -1,20 +1,15 @@
 import * as React from "react";
-import {LinkedList} from "../structures/LinkedList"
-import {DoublyLinkedList} from "../structures/DoublyLinkedList"
-const l = new LinkedList<number>()
-const l2 = new DoublyLinkedList<number>()
+import { Dictionary,HashTable } from "../structures/Dictionary";
+import { OBJSet } from "../structures/Set";
 
-console.log(l2.insert(5,0));
-
-console.log(l2);
-console.log(l2.getElementAt(1));
-console.log(l2.getElementAt(0));
-
+const d = new HashTable();
+d.put("rqwqwr", "qwrqwrqwr");
+d.put("rqwqwr2", "qwrqwrqwr2");
+d.put(3, "qwrqwrqwr3");
+console.log(d.remove(3));
+console.log(d.get("rqwqwr2"));
 
 
-
-
-
-export interface HelloProps { }
+export interface HelloProps {}
 
 export const Hello = (props: HelloProps) => <h1>Hello TDS!</h1>;
