@@ -102,6 +102,7 @@ export class HashTable {
     const valuePair = this.table[this.hashCode(key)];
     return valuePair === null ? undefined : valuePair.value;
   }
+  // 目前用的hash算法
   loseloseHashCode(key: any) {
     if (typeof key === "number") {
       return key;
@@ -112,6 +113,16 @@ export class HashTable {
       hash += tableKey.charCodeAt(i);
     }
     return hash % 37;
+  }
+
+  // 更好的hash算法
+  djb2HashCode(key:any){
+      const tableKey = this.toStrFn(key)
+      let hash = 5381
+      for (let i = 0; i < tableKey.length; i++) {
+          hash = (hash * 33) + tableKey.charCodeAt(i)
+      }
+      return hash % 1013
   }
 
   hashCode(key: any) {
