@@ -1,14 +1,18 @@
 import * as React from "react";
-import { Dictionary,HashTable } from "../structures/Dictionary";
-import { OBJSet } from "../structures/Set";
 
-const d = new HashTable();
-d.put("rqwqwr", "qwrqwrqwr");
-d.put("rqwqwr2", "qwrqwrqwr2");
-d.put(3, "qwrqwrqwr3");
-console.log(d.remove(3));
-console.log(d.get("rqwqwr2"));
+import { BinarySearchTree } from "../structures/Tree";
 
+const d = new BinarySearchTree();
+console.log(d);
+d.insert(7)
+d.insert(6)
+d.insert(5)
+d.insert(8)
+d.insert(10)
+d.insert(9)
+console.log(d.inOrderTraverse((key:any) => console.log(key)));
+console.log(d.preOrderTraverse((key:any) => console.log(key)));
+console.log(d.postOrderTraverse((key:any) => console.log(key)));
 
 export interface HelloProps {}
 

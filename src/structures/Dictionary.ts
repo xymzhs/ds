@@ -116,13 +116,13 @@ export class HashTable {
   }
 
   // 更好的hash算法
-  djb2HashCode(key:any){
-      const tableKey = this.toStrFn(key)
-      let hash = 5381
-      for (let i = 0; i < tableKey.length; i++) {
-          hash = (hash * 33) + tableKey.charCodeAt(i)
-      }
-      return hash % 1013
+  djb2HashCode(key: any) {
+    const tableKey = this.toStrFn(key);
+    let hash = 5381;
+    for (let i = 0; i < tableKey.length; i++) {
+      hash = hash * 33 + tableKey.charCodeAt(i);
+    }
+    return hash % 1013;
   }
 
   hashCode(key: any) {
@@ -151,6 +151,13 @@ export class HashTable {
 
 // 分离链接法解决冲突
 export class HashTableSeparateChaining extends HashTable {
+  table: any;
+  toStrFn: Function;
+  constructor(toStrFn = defaultToString) {
+    super(toStrFn);
+    this.toStrFn = toStrFn;
+    this.table = {};
+  }
   put(key: any, value: any) {
     if (key != null && value != null) {
       const position = this.hashCode(key);
@@ -198,6 +205,13 @@ export class HashTableSeparateChaining extends HashTable {
 
 // 线性探查解决冲突
 export class HashTableLinearProbingLazy extends HashTable {
+  table: any;
+  toStrFn: Function;
+  constructor(toStrFn = defaultToString) {
+    super(toStrFn);
+    this.toStrFn = toStrFn;
+    this.table = {};
+  }
   put(key: any, value: any) {
     if (key != null && value != null) {
       const position = this.hashCode(key);
