@@ -1,2 +1,2 @@
-# TDS
-Typescript data structure
+# Data Structure
+data structure library with typescript 
