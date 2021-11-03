@@ -1,101 +1,128 @@
-import { defaultEquals } from "./utils";
-import { BaseStructure } from "./baseStructure";
+// A linked list is a collection of entities which are not stored in sequential order. Instead, each entity
+// has a pointer to the next entity. Each entity, also referred to as a node, is composed of data and a
+// reference (in other words, a link) to the next node in the sequence.
+// This structure allows for efficient insertion or removal of nodes from any position in the sequence
+// during iteration. More complex implementations of linked lists add additional links, allowing
+// efficient insertion or removal from arbitrary node references. A drawback of linked lists is that
+// access time is linear. Faster access, such as random access, is not possible.
+// The main operations on linked lists are:
+// • prepend - add a node to the beginning of the list
+// • append - add a node to the end of the list
+// • delete - remove a node from the list
+// • deleteTail - remove the last node from the list
+// • deleteHead - remove the first node from the list
+// • find - find a node in the list
 
-export class Node<T> {
-  constructor(public element: T, public next?: Node<T>) {}
+import BaseDataStructure from "./BaseDataStructure";
+
+class LinkedListNode<T> {
+  constructor(public value: T, public next: LinkedListNode<T> | null = null) {}
+  toString(callback?: (v: T) => string) {
+    return callback?.(this.value) || `${this.value}`;
+  }
 }
-export class LinkedList<T> implements BaseStructure {
-  protected equalsFn: Function;
-  protected head: Node<T>;
-  protected count: number = 0;
-  constructor(equalsFn: Function = defaultEquals) {
-    this.equalsFn = equalsFn;
+export class LinkedList<T> implements BaseDataStructure {
+  constructor(
+    public head: LinkedListNode<T> | null = null,
+    public tail: LinkedListNode<T> | null = null,
+    public size: number = 0
+  ) {}
+  prepend(value: T) {
+    const newNode = new LinkedListNode<T>(value, this.head);
+    this.head = newNode;
+    if (!this.tail) {
+      this.tail = newNode;
+    }
+    this.size++;
+    return this;
   }
-  push(element: T) {
-    const node = new Node<T>(element);
-    let current;
-    if (this.head) {
-      current = this.head;
-      while (current.next) {
-        current = current.next;
-      }
-      current.next = node;
-    } else this.head = node;
-    this.count++;
+  append(value: T) {
+    const newNode = new LinkedListNode<T>(value);
+    // If there is no head yet let's make new node a head.
+    if (!this.tail) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      const currentTail = this.tail;
+      currentTail.next = newNode;
+      this.tail = newNode;
+    }
+    this.size++;
+    return this;
   }
-  insert(element: T, index: number) {
-    if (index >= 0 && index < this.count) {
-      const node = new Node<T>(element);
+  insert(value: T, index: number) {
+    if (index >= 0 && index < this.size) {
+      const node = new LinkedListNode<T>(value);
       if (index === 0) {
         const current = this.head;
         node.next = current;
         this.head = node;
       } else {
-        const previous = this.getElementAt(index - 1);
-        const current = previous.next;
-        node.next = current;
-        previous.next = node;
+        const previous = this.getValueAt(index - 1);
+        if (previous) {
+          const current = previous.next;
+          node.next = current;
+          previous.next = node;
+        }
       }
-      this.count++;
+      this.size++;
       return true;
     }
     return false;
   }
-  getElementAt(index: number) {
-    if (index >= 0 && index < this.count) {
+  getValueAt(index: number) {
+    if (index >= 0 && index < this.size) {
       let node = this.head;
       for (let i = 0; i < index && node; i++) {
         node = node.next;
       }
       return node;
     }
-    return undefined;
+    return null;
   }
-  indexOf(element: T) {
+  indexOf(value: T) {
     let current = this.head;
-    for (let i = 0; i < this.count && current; i++) {
-      if (this.equalsFn(element, current.element)) {
+    let i = 0;
+    while (current?.next) {
+      if (value === current.value) {
         return i;
       }
       current = current.next;
+      i++;
     }
     return -1;
   }
-  remove(element: T) {
-    const index = this.indexOf(element);
+  remove(value: T) {
+    const index = this.indexOf(value);
     return this.removeAt(index);
   }
   removeAt(index: number) {
-    if (index >= 0 && index < this.count) {
+    if (index >= 0 && index < this.size && this.head) {
       let current = this.head;
       if (index === 0) {
         this.head = current.next;
       } else {
-        const previous = this.getElementAt(index - 1);
-        current = previous.next;
-        previous.next = current.next;
+        const previous = this.getValueAt(index - 1);
+        if (previous) {
+          current = previous.next!;
+          previous.next = current.next;
+        }
       }
-      this.count--;
-      return current.element;
+      this.size--;
+      return current.value;
     }
-    return undefined;
-  }
-  getHead() {
-    return this.head;
+    return null;
   }
   isEmpty() {
-    return this.size() === 0;
-  }
-  size() {
-    return this.count;
+    return this.size === 0;
   }
 
   toString() {
     if (this.head) {
-      let objString = `${this.head.element}`;
+      let objString = `${this.head.value}`;
       let current = this.head.next;
-      for (let i = 1; i < this.size() && current; i++) {
-        objString = `${objString},${current.element}`;
+      for (let i = 1; i < this.size && current; i++) {
+        objString = `${objString},${current.value}`;
         current = current.next;
       }
       return objString;

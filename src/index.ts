@@ -1,2 +1,2 @@
-import Deque from './Deque'
-export { Deque }
+import { LinkedList } from "./LinkedList";
+export { LinkedList };
