@@ -1,4 +1,4 @@
-class Deque<T> {
+export default class Deque<T> {
   private _count: number = 0;
   private _iterms: {
     [index: number]: T;
