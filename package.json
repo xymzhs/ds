@@ -1,5 +1,5 @@
 {
-  "name": "TDS",
+  "name": "ds",
   "version": "1.0.0",
   "description": "Typescript data structure",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xymzhs/TDS.git"
+    "url": "git+https://github.com/xymzhs/ds.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/xymzhs/TDS/issues"
+    "url": "https://github.com/xymzhs/ds/issues"
   },
-  "homepage": "https://github.com/xymzhs/TDS#readme",
+  "homepage": "https://github.com/xymzhs/ds#readme",
   "devDependencies": {
     "@types/react": "^16.9.38",
     "@types/react-dom": "^16.9.8",
