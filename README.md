@@ -1,2 +1,2 @@
-# Data Structure
+# DS
 data structure library with typescript 
