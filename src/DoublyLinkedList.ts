@@ -10,9 +10,9 @@ export class DoublyNode<T> {
 }
 
 export class DoublyLinkedList<T> implements BaseStructure {
-  protected tail: DoublyNode<T>;
+  protected tail: DoublyNode<T> | undefined;
   protected equalsFn: Function;
-  protected head: DoublyNode<T>;
+  protected head: DoublyNode<T> | undefined;
   protected count: number = 0;
   constructor(equalsFn: Function = defaultEquals) {
     this.equalsFn = equalsFn;

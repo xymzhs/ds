@@ -21,12 +21,14 @@ class LinkedListNode<T> {
     return callback?.(this.value) || `${this.value}`;
   }
 }
+
 export class LinkedList<T> implements BaseDataStructure {
   constructor(
     public head: LinkedListNode<T> | null = null,
     public tail: LinkedListNode<T> | null = null,
     public size: number = 0
   ) {}
+
   prepend(value: T) {
     const newNode = new LinkedListNode<T>(value, this.head);
     this.head = newNode;
@@ -36,6 +38,7 @@ export class LinkedList<T> implements BaseDataStructure {
     this.size++;
     return this;
   }
+
   append(value: T) {
     const newNode = new LinkedListNode<T>(value);
     // If there is no head yet let's make new node a head.
