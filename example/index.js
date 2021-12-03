@@ -1,4 +1,5 @@
 import { LinkedList } from "../src";
+
 let a = new LinkedList();
 const b = new LinkedList();
 a.append(6);

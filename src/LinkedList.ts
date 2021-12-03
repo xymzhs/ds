@@ -15,14 +15,14 @@
 
 import BaseDataStructure from "./BaseDataStructure";
 
-class LinkedListNode<T> {
+export class LinkedListNode<T> {
   constructor(public value: T, public next: LinkedListNode<T> | null = null) {}
   toString(callback?: (v: T) => string) {
     return callback?.(this.value) || `${this.value}`;
   }
 }
 
-export class LinkedList<T> implements BaseDataStructure {
+export class LinkedList<T> {
   constructor(
     public head: LinkedListNode<T> | null = null,
     public tail: LinkedListNode<T> | null = null,
@@ -83,6 +83,22 @@ export class LinkedList<T> implements BaseDataStructure {
     }
     return null;
   }
+
+  find(callback?: (value: T) => any) {
+    if (!this.head) {
+      return null;
+    }
+    let currentNode: LinkedListNode<T> | null = this.head;
+    while (currentNode) {
+      // If callback is specified then try to find node by callback.
+      if (callback?.(currentNode.value)) {
+        return currentNode;
+      }
+
+      currentNode = currentNode.next;
+    }
+    return null;
+  }
   indexOf(value: T) {
     let current = this.head;
     let i = 0;
@@ -119,16 +135,19 @@ export class LinkedList<T> implements BaseDataStructure {
   isEmpty() {
     return this.size === 0;
   }
+  toArray() {
+    const nodes = [];
 
-  toString() {
-    if (this.head) {
-      let objString = `${this.head.value}`;
-      let current = this.head.next;
-      for (let i = 1; i < this.size && current; i++) {
-        objString = `${objString},${current.value}`;
-        current = current.next;
-      }
-      return objString;
-    } else return "";
+    let currentNode = this.head;
+    while (currentNode) {
+      nodes.push(currentNode);
+      currentNode = currentNode.next;
+    }
+    return nodes;
+  }
+  toString(callback: ((v: T) => string) | undefined) {
+    return this.toArray()
+      .map((node) => node.toString(callback))
+      .toString();
   }
 }
