@@ -1,6 +1,6 @@
 # Build and Release Folders
-node_modules/
+node_modules
 example/.cache
-example/.dist
-dist/
+example/build
+example/dist
 

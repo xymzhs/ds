@@ -2,16 +2,16 @@
   "name": "ds",
   "version": "1.0.0",
   "description": "Typescript data structure",
-  "main": "dist/index.esm.js",
-  "module": "dist/index.esm.js",
+  "main": "example/build/index.umd.js",
+  "module": "example/build/index.js",
   "files": [
-    "dist"
+    "example/build"
   ],
-  "typings": "dist/index.d.ts",
+  "types": "example/build/index.d.ts",
   "scripts": {
-    "dev": "rollup -wc rollup.config.dev.js",
-    "build:dev": "rollup -c rollup.config.dev.js",
-    "build:prod": "rollup -c rollup.config.prod.js",
+    "dev": "concurrently --kill-others \"rollup -wc rollup.config.js\" \"cd example && npm start\"",
+    "build:dev": "cross-env NODE_ENV=development rollup -c rollup.config.js",
+    "build:prod": "cross-env NODE_ENV=production rollup -c rollup.config.js",
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
@@ -20,7 +20,12 @@
     "url": "git+https://github.com/xymzhs/ds.git"
   },
   "keywords": [
-    "data",
+    "graph",
+    "tree",
+    "deque",
+    "linked-list",
+    "set",
+    "queue",
     "typescript"
   ],
   "author": {
@@ -30,7 +35,7 @@
   "license": "MIT",
   "size-limit": [
     {
-      "path": "dist/index.esm.js",
+      "path": "dist/index.js",
       "limit": "5 KB"
     }
   ],
@@ -39,17 +44,19 @@
   },
   "homepage": "https://github.com/xymzhs/ds#readme",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^14.0.0",
-    "@rollup/plugin-node-resolve": "^8.4.0",
-    "@size-limit/preset-small-lib": "^5.0.1",
-    "prettier": "^2.3.2",
-    "rollup": "^2.53.3",
-    "rollup-plugin-filesize": "^9.1.1",
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@size-limit/preset-small-lib": "^7.0.8",
+    "concurrently": "^7.2.0",
+    "cross-env": "^7.0.3",
+    "prettier": "^2.6.2",
+    "rollup": "^2.73.0",
+    "rollup-plugin-filesize": "^9.1.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^6.1.0",
     "rollup-plugin-typescript2": "^0.27.3",
-    "size-limit": "^5.0.1",
-    "tslib": "^2.3.0",
-    "typescript": "^4.4.4"
+    "size-limit": "^7.0.8",
+    "tslib": "^2.4.0",
+    "typescript": "^4.6.4"
   }
 }
