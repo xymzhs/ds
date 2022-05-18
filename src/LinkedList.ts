@@ -13,8 +13,6 @@
 // • deleteHead - remove the first node from the list
 // • find - find a node in the list
 
-import BaseDataStructure from "./BaseDataStructure";
-
 export class LinkedListNode<T> {
   constructor(public value: T, public next: LinkedListNode<T> | null = null) {}
   toString(callback?: (v: T) => string) {

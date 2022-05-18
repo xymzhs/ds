@@ -70,6 +70,7 @@ export class Dictionary {
       for (let i = 1; i < valuePair.length; i++) {
         objString = `${objString},${valuePair[i].toString()}`;
       }
+      return objString;
     } else return "";
   }
 }
